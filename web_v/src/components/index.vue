@@ -11,7 +11,7 @@ export default {
   name: 'index',
   data (){
     return {
-
+     
     }
   },
   methods: { 
@@ -26,8 +26,8 @@ export default {
 
 <style type="text/css">
    .fd-say{
-     
-     position:relative;
+      z-index: 2;
+     position:absolute;
      width: 50px;
   height:   50px;
     background: rgba(0, 0, 0, 0);

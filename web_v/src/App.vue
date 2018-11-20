@@ -1,5 +1,6 @@
 <template>
     <div class="homepage-hero-module">
+      <router-view></router-view>
       <div class="video-container">
         <div :style="fixStyle" class="filter"></div>
         <video :style="fixStyle" autoplay loop class="fillWidth" v-on:canplay="canplay">
@@ -25,13 +26,14 @@ export default {
         fixStyle: ''
       }
     },
-   created () {
-       router.push({name: 'index'});
+  created () {
+        router.push({name: 'index'});
     },
   methods: { 
     canplay() {
         this.vedioCanPlay = true
       },
+    
     goto: function () {
       router.push({name: 'index'});
     }
