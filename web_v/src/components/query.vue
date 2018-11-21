@@ -1,20 +1,43 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    
-  </div>
+    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+  <el-form-item label="类型">
+    <el-select v-model="formInline.region" placeholder="选择类型">
+      <el-option label="短信" value="短信"></el-option>
+      <el-option label="说吧" value="说吧"></el-option>
+    </el-select>
+    </el-form-item>
+  <el-form-item label="手机号">
+    <el-input v-model="formInline.remobile" placeholder="收件人手机号"></el-input>
+  </el-form-item>
+ <el-form-item label="手机号">
+    <el-input v-model="formInline.sendmobile" placeholder="本人手机号，用于接收回复"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="onSubmit">查询</el-button>
+  </el-form-item>
+</el-form>
+</div>
 </template>
 
 <script>
-
-export default {
-  name: 'query',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  export default {
+    name: 'query',
+    data() {
+      return {
+        formInline: {
+         remobile: '',
+          sendmobile: '',
+          region: ''
+        }
+      }
+    },
+    methods: {
+      onSubmit() {
+        console.log('submit!');
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -22,11 +45,10 @@ export default {
 .hello{
       z-index: 2;
      position:absolute;
-     width: 50px;
-  height:   50px;
+   
     background: rgba(0, 0, 0, 0);
-  top: 20%;
-  left: 20%;
+  top: 30%;
+  left: 10%;
   border:none;
 }
 </style>
