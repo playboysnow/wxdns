@@ -1,6 +1,6 @@
 <template>
-  <div class="hello">
-    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+  <div class="hello" >
+    <el-form :inline="true" :model="formInline" class="demo-form-inline" >
   <el-form-item label="类型">
     <el-select v-model="formInline.region" placeholder="选择类型">
       <el-option label="短信" value="短信"></el-option>
@@ -8,18 +8,18 @@
     </el-select>
     </el-form-item>
   <el-form-item label="手机号">
-    <el-input v-model="formInline.remobile" placeholder="收件人手机号"></el-input>
+    <el-input v-model="formInline.remobile" placeholder="收件人手机号" clearable></el-input>
   </el-form-item>
  <el-form-item label="手机号">
-    <el-input v-model="formInline.sendmobile" placeholder="本人手机号，用于接收回复"></el-input>
+    <el-input v-model="formInline.sendmobile" placeholder="本人手机号，用于接收回复" clearable></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="onSubmit">发送</el-button>
   </el-form-item>
 </el-form>
-<div>
+<div class="input">
   <el-input label="内容" v-model="input" placeholder="请输入内容,不包含特殊字符" clearable></el-input>
-  <el-input label="内容" type="textarea" autosize placeholder="请输入内容" v-model="textarea" clearable></el-input>
+  <el-input label="内容" type="textarea" autosize v-model="textarea" placeholder="请输入内容"  clearable></el-input>
   </div>
 </div>
 </template>
@@ -57,6 +57,11 @@
   left: 10%;
   border:none;
 }
-
-
+.input{
+  z-index: 2;
+  position:absolute;
+  width: 970px;
+  height:   100px;
+  
+}
 </style>

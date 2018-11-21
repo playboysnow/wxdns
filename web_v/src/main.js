@@ -10,8 +10,8 @@ import router from './router'
 import Resource from 'vue-resource'
 
 
-Vue.use(iView);
-Vue.use(ElementUI);
+Vue.use(iView)
+Vue.use(ElementUI)
 Vue.use(Resource)
 Vue.config.productionTip = false
 
