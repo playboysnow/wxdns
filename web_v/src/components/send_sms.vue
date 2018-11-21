@@ -8,7 +8,7 @@
 <script>
 
 export default {
-  name: 'sendsms',
+  name: 'query',
   data () {
     return {
       msg: 'sendsms'

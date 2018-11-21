@@ -2,12 +2,13 @@
   <div>
   <div class="fd-button">
            <button class="button" @click="go">你说</button>
-           <router-view/>
+           
          </div>   
     <div class="fd-back">
           <button class="back" @click="back">说吧</button>
-          <router-view/>
-         </div>     
+          
+         </div>  
+    <router-view></router-view>   
   </div>
 </template>
 
@@ -22,10 +23,10 @@ export default {
   },
   methods: { 
     go: function () {
-      router.push({name: 'query'});
+      router.push({name: 'send_sms'});
     },
-     back: function () {
-      router.push({name: 'sendsms'});
+    back: function () {
+      router.push({path: '/group'});
     }
  }
 }
@@ -41,7 +42,7 @@ export default {
   height:   50px;
     background: rgba(0, 0, 0, 0);
   top: 70%;
-  left: 30%;
+  left: 20%;
   border:none;
 } 
   .fd-back{
@@ -51,7 +52,7 @@ export default {
   height:   50px;
     background: rgba(0, 0, 0, 0);
   top: 80%;
-  left: 30%;
+  left: 40%;
   border:none;
 } 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
