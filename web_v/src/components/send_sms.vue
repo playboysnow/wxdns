@@ -1,5 +1,7 @@
 <template>   
   <div class="hello" >
+
+    <div class="label_send">
     <el-form :inline="true" :model="formInline" class="demo-form-inline" >
     <el-form-item label="类型">
     <el-select v-model="formInline.region" placeholder="选择类型">
@@ -16,18 +18,41 @@
     <el-form-item>
     <el-button type="primary" @click="onSubmit">送信</el-button>
     </el-form-item>
+    
 </el-form>
-  <el-input label="内容" v-model="input" placeholder="请输入内容,不包含特殊字符" clearable></el-input>
-<div class="input">
-  <el-input label="内容" type="textarea" autosize  v-model="textarea" placeholder="请输入内容，不允许特殊字符，不超过1340个字"  clearable></el-input>
+</div>
+
+<div class="input">送信内容（表达歉意、告白、祝福等，推荐与对方面对面进行；若联系不上“比如被拉黑”，可采用此方式）
+   
+  <el-input label="内容" type="textarea" :rows="8" id="area" maxlength="1340" v-model="textarea" placeholder="请输入内容，不允许特殊字符，不超过1340个字"  clearable></el-input>
+  <p><span id="text-count">字数限制</span>1340个</p>
+
   </div>
 </div>
+
 </template>
 
 <script>
+/*
+todo:
+1、手机号格式校验
+2、输入框剩余字数统计
+3、数据封装、传后端接口
+4、选择说吧时，弹出提示框，功能开发中
+5、查询按钮放置、帮助页面
+6、说吧页面显示，弹框提示
+ */
   export default {
+    
     name: 'send_sms',
     data() {
+      var validatePhone = (rule, value, callback) => {
+      if (/^1[34578]{1}\d{9}$/.test(value) == false) {
+        callback(new Error("请输入正确的手机号"));
+      } else {
+        callback();
+      }
+    };
       return {
         input: '',
         textarea: '',
@@ -39,7 +64,9 @@
       }
     },
     methods: {
+      
       onSubmit() {
+
         console.log('submit!');
       }
     }
@@ -48,6 +75,22 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.al{
+      z-index: 2;
+     position:absolute;
+    background: rgba(0, 0, 0, 0);
+  top: 10%;
+  border:none;  
+}
+.al_button{
+      z-index: 2;
+     position:absolute;
+    background: rgba(0, 0, 0, 0);
+  top: 10%;
+  left:90%;
+  border:none;  
+}
+
 .hello{
       z-index: 2;
      position:absolute;
@@ -55,7 +98,17 @@
   height:   200px;
     background: rgba(0, 0, 0, 0);
   top: 30%;
-  left: 10%;
+  left: 15%;
+  border:none;
+  
+}
+.label_send{
+      z-index: 2;
+     position:absolute;
+    width: 920px;
+  height:   100px;
+    background: rgba(0, 0, 0, 0);
+
   border:none;
 }
 .input{
@@ -63,7 +116,12 @@
   position:absolute;
   width: 920px;
   height:   100px;
-  top: 60%;
+  top: 40%;
+  font-size: large;
+  font-weight:bold;
+  background: rgba(0, 0, 0, 0);
+  border:none;
+
 }
 .fd-help{
       z-index: 2;

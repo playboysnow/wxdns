@@ -27,6 +27,13 @@ export default {
     },
     back: function () {
       router.push({path: '/group'});
+      this.$alert('说吧论坛功能开发中', '提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+           router.push({name: 'index'});
+            
+          }
+        });
     }
  }
 }
