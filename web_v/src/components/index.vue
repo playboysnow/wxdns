@@ -1,7 +1,7 @@
 <template>
   <div>
   <div class="fd-button">
-           <button class="fd-button" @click="go">你说</button>
+           <button class="fd-button" @click="go">我想对你说</button>
            
          </div>   
     <div class="fd-back">

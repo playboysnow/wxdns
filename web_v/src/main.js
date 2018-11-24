@@ -8,7 +8,9 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import router from './router'
 import Resource from 'vue-resource'
+import MuseUI from 'muse-ui';
 
+Vue.use(MuseUI);
 
 Vue.use(iView)
 Vue.use(ElementUI)

@@ -4,7 +4,7 @@
       <div class="video-container">
         <div :style="fixStyle" class="filter"></div>
         <video :style="fixStyle" autoplay loop class="fillWidth" v-on:canplay="canplay">
-          <source src="../static/bg.mp4" type="video/mp4"/>
+          <source src="../static/mz.mp4" type="video/mp4"/>
         浏览器不支持 video 标签，建议升级浏览器。
         </video>
           <div  class="poster hidden" v-if="!vedioCanPlay">
