@@ -14,8 +14,8 @@
     width: 920px;
   height:   200px;
     background: rgba(0, 0, 0, 0);
-  top: 10%;
-  left: 10%;
+  top: 20%;
+  left: 40%;
 } 
 </style>
 

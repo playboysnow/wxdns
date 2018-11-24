@@ -16,7 +16,7 @@
     <el-input v-model="formInline.sendmobile" placeholder="本人手机号，用于接收回复" clearable></el-input>
   </el-form-item>
     <el-form-item>
-    <el-button type="primary" @click="onSubmit">送信</el-button>
+    <el-button type="primary" @click="onSubmit(form)">送信</el-button>
     </el-form-item>
     
 </el-form>
@@ -36,25 +36,17 @@
 /*
 todo:
 1、手机号格式校验
-2、输入框剩余字数统计、特殊字符校验
+2、输入框剩余字数统计、特殊字符校验、内容加缓存
 3、数据封装、传后端接口
-4、选择说吧时，弹出提示框，功能开发中
+4、选择说吧时，弹出提示框，功能开发中 done
 5、查询按钮放置、帮助页面
-6、说吧页面显示，弹框提示
+6、说吧页面显示，弹框提示  done
  */
   export default {
     
     name: 'send_sms',
     data() {
-      var validatePhone = (rule, value, callback) => {
-      if (/^1[34578]{1}\d{9}$/.test(value) == false) {
-        callback(new Error("请输入正确的手机号"));
-      } else {
-        callback();
-      }
-    };
       return {
-        input: '',
         textarea: '',
         formInline: {
           remobile: '',
@@ -64,9 +56,28 @@ todo:
       }
     },
     methods: {
-      
-      onSubmit() {
-
+     
+      onSubmit: function() { 
+        var textarea=this.textarea;
+        var remobile=this.formInline.remobile;
+        var sendmobile=this.formInline.sendmobile;
+        var region=this.formInline.region;
+        var postdata = {
+          textarea:textarea,
+          remobile:remobile,
+          sendmobile:sendmobile,
+          region:region
+        };
+        /*调试参数
+        this.$alert(postdata, '提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+           router.push({name: 'index'});
+            
+          },
+          
+        });*/
+        
         console.log('submit!');
       }
     }
