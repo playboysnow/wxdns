@@ -4,19 +4,20 @@
     <div class="label_send">
     <el-form :inline="true" :model="formInline" class="demo-form-inline" >
     <el-form-item label="类型">
-    <el-select v-model="formInline.region" placeholder="选择类型">
+    <el-select id="func" v-model="formInline.region" placeholder="选择类型" @change="change">
       <el-option label="短信" value="短信"></el-option>
       <el-option label="说吧" value="说吧"></el-option>
     </el-select>
+    
     </el-form-item>
     <el-form-item label="手机号">
-    <el-input v-model="formInline.remobile" placeholder="收件人手机号" clearable></el-input>
+    <el-input v-model="formInline.remobile" placeholder="收件人手机号" disable="isable" clearable></el-input>
   </el-form-item>
    <el-form-item label="手机号">
-    <el-input v-model="formInline.sendmobile" placeholder="本人手机号，用于接收回复" clearable></el-input>
+    <el-input v-model="formInline.sendmobile" placeholder="本人手机号，用于接收回复" disable="isable" clearable></el-input>
   </el-form-item>
     <el-form-item>
-    <el-button type="primary" @click="onSubmit(form)">送信</el-button>
+    <el-button type="primary" @click="onSubmit()">送信</el-button>
     </el-form-item>
     
 </el-form>
@@ -37,7 +38,7 @@
 todo:
 1、手机号格式校验
 2、输入框剩余字数统计、特殊字符校验、内容加缓存
-3、数据封装、传后端接口
+3、数据封装、传后端接口    done
 4、选择说吧时，弹出提示框，功能开发中 done
 5、查询按钮放置、帮助页面
 6、说吧页面显示，弹框提示  done
@@ -48,6 +49,7 @@ todo:
     data() {
       return {
         textarea: '',
+        isable:'false',
         formInline: {
           remobile: '',
           sendmobile: '',
@@ -56,12 +58,26 @@ todo:
       }
     },
     methods: {
-     
+      change: function(value) {
+          if(this.formInline.region=="说吧"){
+            
+            this.$alert("说吧功能开发中", '提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+               this.formInline.region=="";
+          },
+          
+        });
+          
+          }
+      },
       onSubmit: function() { 
-        var textarea=this.textarea;
+        var isable=this.isable;
+        var region=this.formInline.region;
         var remobile=this.formInline.remobile;
         var sendmobile=this.formInline.sendmobile;
-        var region=this.formInline.region;
+        var textarea=this.textarea;
+        
         var postdata = {
           textarea:textarea,
           remobile:remobile,
@@ -77,7 +93,28 @@ todo:
           },
           
         });*/
-        
+        this.$http.post('/send_sms',postdata).then(response => {
+          response = response.body;
+          var data=response.data;
+          if (data.status==0){
+            this.$alert("发送成功", '提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+           router.push({name: 'send_sms'});     
+          },
+          
+        });
+          }
+          else {
+            this.$alert("发送失败", '提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+           router.push({name: 'send_sms'});     
+          },
+          
+        });
+          }
+        })
         console.log('submit!');
       }
     }
