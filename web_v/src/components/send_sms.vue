@@ -22,7 +22,7 @@
 </el-form>
 </div>
 
-<div class="input">送信内容（表达歉意、告白、祝福等，推荐与对方面对面进行；若联系不上“比如被拉黑”，可采用此方式）
+<div class="input">送信内容（表达歉意、告白、祝福等，推荐与对方面对面进行；若联系不上“比如被拉黑”，可采用此方式。切不可频繁发送打扰对方的生活）
    
   <el-input label="内容" type="textarea" :rows="8" id="area" maxlength="1340" v-model="textarea" placeholder="请输入内容，不允许特殊字符，不超过1340个字"  clearable></el-input>
   <p><span id="text-count">字数限制</span>1340个</p>
@@ -36,7 +36,7 @@
 /*
 todo:
 1、手机号格式校验
-2、输入框剩余字数统计
+2、输入框剩余字数统计、特殊字符校验
 3、数据封装、传后端接口
 4、选择说吧时，弹出提示框，功能开发中
 5、查询按钮放置、帮助页面
