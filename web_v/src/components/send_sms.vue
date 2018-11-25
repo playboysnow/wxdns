@@ -28,7 +28,8 @@
 <div class="input">送信内容（表达歉意、告白、祝福等，推荐与对方面对面进行；若联系不上“比如被拉黑”，可采用此方式。切不可频繁发送打扰对方的生活）
    
   <el-input label="内容" type="textarea" :rows="8" id="area" maxlength="1340" v-model="textarea" placeholder="请输入内容，不允许特殊字符，不超过1340个字 
-禁止发送股票、移民、面试招聘、彩票、返利、贷款、催款、投资理财、赌博、中奖、一元夺宝、一元秒杀、A货、医疗、整形、美容、会所、酒吧、足浴、暴力、恐吓、色情、皮草、助考，商标注册、加群、加QQ或者加微信、贩卖个人信息、宣传短信通道、游戏推广、会展推广、网站推广、优惠券类推广、卡类推广、保险推广、酒类、用户拉新、用户召回，另外金融、房地产、教育这几类" 
+禁止发送股票、移民、面试招聘、彩票、返利、贷款、催款、投资理财、赌博、中奖、一元夺宝、一元秒杀、A货、医疗、整形、美容、会所、酒吧、足浴、暴力、恐吓、色情、皮草、助考，商标注册、加群、加QQ或者加微信、贩卖个人信息、宣传短信通道、游戏推广、会展推广、网站推广、优惠券类推广、卡类推广、保险推广、酒类、用户拉新、用户召回，另外金融、房地产、教育这几类
+" 
    clearable></el-input>
   <p><span id="text-count">字数限制</span>1340个</p>
 
@@ -104,10 +105,10 @@ todo:
         });
           }
         var postdata = {
-          textarea:textarea,
-          remobile:remobile,
-          sendmobile:sendmobile,
-          region:region
+          "textarea":textarea,
+          "remobile":remobile,
+          "sendmobile":sendmobile,
+          "region":region
         };
         /*调试参数
         this.$alert(postdata, '提示', {
@@ -118,7 +119,7 @@ todo:
           },
           
         });*/
-        this.$http.post('/send_sms',postdata).then(response => {
+        this.$http.post('http://127.0.0.1:5001/send_sms',postdata).then(response => {
           response = response.body;
           var data=response.data;
           if (data.status==0){
