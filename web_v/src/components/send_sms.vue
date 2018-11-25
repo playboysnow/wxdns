@@ -47,6 +47,7 @@ todo:
 4、选择说吧时，弹出提示框，功能开发中 done
 5、查询按钮放置、帮助页面  
 6、说吧页面显示，弹框提示  done
+7、兼容safri
  */
   export default {
     
