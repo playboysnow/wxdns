@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from flask import Flask,render_template,request,redirect
 import urllib,requests,sys
@@ -6,7 +7,8 @@ from qcloudsms_py import SmsSingleSender
 from qcloudsms_py.httpclient import HTTPError
 import json
 reload(sys)
-sys.setdefaultencoding('gb2312')
+sys.setdefaultencoding('UTF-8')
+#sys.setdefaultencoding('gb2312')
 
 handler=logging.FileHandler('run.log',encoding='UTF-8')
 
@@ -44,7 +46,7 @@ def send_sms():
             "message":"发送失败" 
         }
     data=request.get_data()
-    print data
+    print data.decode('UTF-8')
     app.logger.info(data)
     '''res=send()
     if res['result']==0:
