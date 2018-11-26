@@ -80,10 +80,8 @@ todo:
        checknum: function(callback){
         this.formInline.remobile=this.formInline.remobile.replace(/[^\.\d]/g,'');
         this.formInline.remobile=this.formInline.remobile.replace('.','');
-        if (this.formInline.remobile.length!=11 ){
-          //this.$alert("123")
-          callback(new Error("手机号为11位"))
-        }
+        this.formInline.sendmobile=this.formInline.sendmobile.replace(/[^\.\d]/g,'');
+        this.formInline.sendmobile=this.formInline.sendmobile.replace('.','');
          },
       /*下拉框监听 */
       change: function(callback) {
@@ -122,8 +120,18 @@ todo:
           confirmButtonText: '确定',        
         });
           }
-          else if (remobile=="") {
+          if (remobile=="") {
             this.$alert("收信人手机号不能为空", '提示', {
+          confirmButtonText: '确定',        
+        });
+          }
+          else if (remobile.length!=11){
+            this.$alert("收信人手机号为11位数字", '提示', {
+          confirmButtonText: '确定',        
+        });
+          }
+        else if (sendmobile!=""&&sendmobile.length!=11){
+            this.$alert("本人手机号为11位数字", '提示', {
           confirmButtonText: '确定',        
         });
           }
