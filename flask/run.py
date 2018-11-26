@@ -15,12 +15,12 @@ app.logger.addHandler(handler)
 @app.route('/send',methods=["POST"])
 def send():
     sms_type = 0
-    appid="1400162404"
-    appkey="9993bac2a2b15a202bd718ea2e40d33d"
+    appid="140016XXXXX"
+    appkey="9993bac2a2b15aXXX"
     ssender = SmsSingleSender(appid, appkey)
     try:
         #print data['remobile'],data['text']
-        result = ssender.send(sms_type, 86, '18510015723',
+        result = ssender.send(sms_type, 86, '123',
             ['123'], extend="", ext="")
         print result
     except HTTPError as e:
