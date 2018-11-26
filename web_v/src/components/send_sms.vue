@@ -20,7 +20,7 @@
     {required:ture, message:'必须为11位可用手机号',trigger:'blur'}
     
     ]">
-    <el-input v-model="formInline.sendmobile"   placeholder="本人手机号，用于接收回复" disable="isable" clearable></el-input>
+    <el-input v-model="formInline.sendmobile"   placeholder="本人手机号，用于接收回复" disable="isable" @keyup.native="checknum" clearable></el-input>
   </el-form-item>
     <el-form-item>
     <el-button type="primary" @click="onSubmit()">送信</el-button>
@@ -77,13 +77,16 @@ todo:
          this.word_num=1340-txt;
        },
      /*手机号为数字 */
-       checknum: function(){
+       checknum: function(callback){
         this.formInline.remobile=this.formInline.remobile.replace(/[^\.\d]/g,'');
         this.formInline.remobile=this.formInline.remobile.replace('.','');
-        
+        if (this.formInline.remobile.length!=11 ){
+          //this.$alert("123")
+          callback(new Error("手机号为11位"))
+        }
          },
       /*下拉框监听 */
-      change: function() {
+      change: function(callback) {
           if(this.formInline.region=="说吧"){
             
             this.$alert("说吧功能开发中", '提示', {
@@ -96,7 +99,7 @@ todo:
           
           }
       },
-      onSubmit: function() { 
+      onSubmit: function(callback) { 
         var isable=this.isable;
         var region=this.formInline.region;
         var remobile=this.formInline.remobile;
@@ -139,7 +142,7 @@ todo:
           },
           
         });*/
-        this.$http.post('http://127.0.0.1:5001/send_sms',postdata).then(response => {
+        this.$http.post('/api/send_sms',postdata).then(response => {
           response = response.body;
           var data=response.data;
           if (data.status==0){
