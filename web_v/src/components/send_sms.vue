@@ -152,8 +152,9 @@ todo:
         });*/
         this.$http.post('/api/send_sms',postdata).then(response => {
           response = response.body;
-          var data=response.data;
-          if (data.status==0){
+          //var data=response.data;
+          //this.$alert(response)
+          if (response.status==0){
             this.$alert("发送成功", '提示', {
           confirmButtonText: '确定',
           callback: action => {

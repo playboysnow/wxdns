@@ -4,6 +4,7 @@ import urllib,requests,sys
 import logging
 from qcloudsms_py import SmsSingleSender
 from qcloudsms_py.httpclient import HTTPError
+import json
 reload(sys)
 sys.setdefaultencoding('gb2312')
 
@@ -34,24 +35,27 @@ def send():
 @app.route('/send_sms',methods=["POST"])
 
 def send_sms():
-    data=request.get_data()
-    print data
-    app.logger.info(data)
-    res=send()
-    if res['result']==0:
-        succ={
+    succ={
             "status":0,
             "message":"发送成功"
         }
-        return succ
-    else:
-        fail={
+    fail={
             "status":1,
             "message":"发送失败" 
         }
+    data=request.get_data()
+    print data
+    app.logger.info(data)
+    '''res=send()
+    if res['result']==0:
+        
+        return succ
+    else:
+        
         return fail
-
-
+'''
+    print json.dumps(succ)
+    return json.dumps(fail)
 
 
 if __name__=='__main__':
