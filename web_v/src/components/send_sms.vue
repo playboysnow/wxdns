@@ -57,10 +57,7 @@ todo:
     
     name: 'send_sms',
     data() {
-      
-        
-        
-      
+
       return {
         word_num: 1340,
         textarea: '',
@@ -70,21 +67,22 @@ todo:
           sendmobile: '',
           region: ''
         },
-       
-        
+   
       }
     },
     methods: {
+      /*字数统计 */
        word: function(){
          var txt=this.textarea.length;
          this.word_num=1340-txt;
        },
-     
+     /*手机号为数字 */
        checknum: function(){
         this.formInline.remobile=this.formInline.remobile.replace(/[^\.\d]/g,'');
         this.formInline.remobile=this.formInline.remobile.replace('.','');
         
          },
+      /*下拉框监听 */
       change: function() {
           if(this.formInline.region=="说吧"){
             
