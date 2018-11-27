@@ -153,7 +153,7 @@ todo:
         this.$http.post('/api/send_sms',postdata).then(response => {
           response = response.body;
           //var data=response.data;
-          //this.$alert(response)
+          //this.$alert(postdata)
           if (response.status==0){
             this.$alert("发送成功", '提示', {
           confirmButtonText: '确定',
@@ -164,12 +164,15 @@ todo:
         });
           }
           else {
+             this.$alert("腾讯云服务已放弃（模板单一，涉及个人隐私），其他服务调研中", '提示', {
+          confirmButtonText: '确定',
+          /*
             this.$alert("发送失败", '提示', {
           confirmButtonText: '确定',
           callback: action => {
            router.push({name: 'send_sms'});     
           },
-          
+          */
         });
           }
         })

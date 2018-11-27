@@ -10,11 +10,11 @@ reload(sys)
 sys.setdefaultencoding('UTF-8')
 #sys.setdefaultencoding('gb2312')
 
-handler=logging.FileHandler('run.log',encoding='UTF-8')
+#handler=logging.FileHandler('run.log',encoding='UTF-8')
 
 app=Flask(__name__)
 
-app.logger.addHandler(handler)
+#app.logger.addHandler(handler)
 @app.route('/send',methods=["POST"])
 def send():
     sms_type = 0
@@ -37,6 +37,8 @@ def send():
 @app.route('/send_sms',methods=["POST"])
 
 def send_sms():
+    handler=logging.FileHandler('run.log',encoding='UTF-8')
+    app.logger.addHandler(handler)
     succ={
             "status":0,
             "message":"发送成功"
@@ -46,8 +48,12 @@ def send_sms():
             "message":"发送失败" 
         }
     data=request.get_data()
-    print data.decode('UTF-8')
-    app.logger.info(data)
+    ip = request.remote_addr
+    zwdata=data.decode('UTF-8')
+    print zwdata
+    print ip
+    app.logger.info(zwdata)
+    app.logger.info(ip)
     '''res=send()
     if res['result']==0:
         
