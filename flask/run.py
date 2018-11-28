@@ -12,8 +12,14 @@ sys.setdefaultencoding('UTF-8')
 
 #handler=logging.FileHandler('run.log',encoding='UTF-8')
 
-app=Flask(__name__)
+app=Flask(__name__, static_folder="./dist/static",
+            template_folder="./dist")
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
 
+def index():
+
+    return render_template("index.html")
 #app.logger.addHandler(handler)
 @app.route('/send',methods=["POST"])
 def send():
@@ -49,11 +55,13 @@ def send_sms():
         }
     data=request.get_data()
     ip = request.remote_addr
+    real_ip = request.http_x_forwarded_for
     zwdata=data.decode('UTF-8')
     print zwdata
     print ip
-    app.logger.info(zwdata)
-    app.logger.info(ip)
+    app.logger.info("data:",zwdata)
+    app.logger.info("ip:",ip)
+    app.logger.info("real_ip:",real_ip)
     '''res=send()
     if res['result']==0:
         
