@@ -40,8 +40,8 @@ def send():
     ssender = SmsSingleSender(appid, appkey)
     try:
         #print data['remobile'],data['text']
-        result = ssender.send_with_param(86, '18510015723',
-            "236311",['人生如同沙滩漫步','5'], extend="", ext="")
+        result = ssender.send_with_param(86, '',
+            "23631",['','5'], extend="", ext="")
         print result
     except HTTPError as e:
         print(e)
@@ -62,10 +62,10 @@ def puller():
     mspuller = SmsMobileStatusPuller(appid, appkey)
     try:
     # 拉取短信回执
-        callback_result=mspuller.pull_callback("86", '13146741468',
+        callback_result=mspuller.pull_callback("86", '',
             begin_time, end_time, max_num)
     # 拉取回复
-        reply_result = mspuller.pull_reply("86", '13146741468',
+        reply_result = mspuller.pull_reply("86", '',
             begin_time, end_time, max_num)
     except HTTPError as e:
         print(e)
