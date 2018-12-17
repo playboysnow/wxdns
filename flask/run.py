@@ -1,9 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+接口类型：
+1、账号相关
+2、页面内容相关
+3、外接三方接口、或者调用三方接口
+4、数据库等操作
+"""
+
 from flask import Flask,render_template,request,redirect
 import urllib,requests,sys
 import logging
 from qcloudsms_py import SmsSingleSender
+from qcloudsms_py import SmsMobileStatusPuller
 from qcloudsms_py.httpclient import HTTPError
 import json
 reload(sys)
@@ -24,21 +33,48 @@ def index():
 @app.route('/send',methods=["POST"])
 def send():
     sms_type = 0
-    appid="140016XXXXX"
-    appkey="9993bac2a2b15aXXX"
+   # appid="140016XXXXX"
+    appid="	1400162404"
+    #appkey="9993bac2a2b15aXXX"
+    appkey="9993bac2a2b15a202bd718ea"
     ssender = SmsSingleSender(appid, appkey)
     try:
         #print data['remobile'],data['text']
-        result = ssender.send(sms_type, 86, '123',
-            ['123'], extend="", ext="")
+        result = ssender.send_with_param(86, '18510015723',
+            "236311",['人生如同沙滩漫步','5'], extend="", ext="")
         print result
     except HTTPError as e:
         print(e)
     except Exception as e:
         print(e)
 
-    print(result)
-    return result
+    return json.dumps(result)
+@app.route('/puller',methods=["POST"])
+def puller():
+    sms_type = 0
+   # appid="140016XXXXX"
+    appid="	1400162404"
+    #appkey="9993bac2a2b15aXXX"
+    appkey="9993bac2a2b15a202bd718ea"
+    begin_time=1544423142
+    end_time=1545027942
+    max_num = 10             # 单次拉取最大量
+    mspuller = SmsMobileStatusPuller(appid, appkey)
+    try:
+    # 拉取短信回执
+        callback_result=mspuller.pull_callback("86", '13146741468',
+            begin_time, end_time, max_num)
+    # 拉取回复
+        reply_result = mspuller.pull_reply("86", '13146741468',
+            begin_time, end_time, max_num)
+    except HTTPError as e:
+        print(e)
+    except Exception as e:
+        print(e)
+
+    print(callback_result)
+    print(reply_result)
+    return json.dumps(callback_result,reply_result)
 
 @app.route('/send_sms',methods=["POST"])
 
@@ -55,7 +91,7 @@ def send_sms():
         }
     data=request.get_data()
     ip = request.remote_addr
-    real_ip = request.http_x_forwarded_for
+    real_ip = request.headers
     zwdata=data.decode('UTF-8')
     print zwdata
     print ip
